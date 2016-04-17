@@ -25,6 +25,7 @@
 
 @property(nonatomic , strong)FilmModel *model;
 
++ (instancetype)cellWithTableView:(UITableView *)tableView;
 
 
 @end

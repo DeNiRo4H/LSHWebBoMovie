@@ -9,7 +9,7 @@
 #import "LSHTabBarViewController.h"
 #import "LSHNavigationViewController.h"
 #import "LSHTabBar.h"
-#import "HotMovieViewController.h"
+#import "LSHHotMovieViewController.h"
 #import "FilmReviewViewController.h"
 #import "AddViewController.h"
 #import "BuyTicketViewController.h"
@@ -55,7 +55,7 @@
 {
     
     //1 电影
-    HotMovieViewController *hot = [[HotMovieViewController alloc]init];
+    LSHHotMovieViewController *hot = [[LSHHotMovieViewController alloc]init];
     [self setupChildViewController:hot title:@"电影" imageName:@"label_bar_movie_normal" selectedImageName:@"label_bar_movie_selected"];
     
     //2 影评

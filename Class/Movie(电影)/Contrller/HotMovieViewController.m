@@ -62,7 +62,6 @@ static NSString *movieListID =@"movieListID";
 }
 
 
-
 - (void)viewDidLoad {
     
     self.view.backgroundColor = [UIColor colorWithRed:0.263f green:0.290f blue:0.322f alpha:1.00f];     //创建上方的切换按钮

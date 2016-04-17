@@ -12,6 +12,17 @@
 
 
 
+#pragma mark - 初始化
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"cellID";
+    MovieListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[MovieListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+    }
+    return cell;
+}
+
 
 
 
