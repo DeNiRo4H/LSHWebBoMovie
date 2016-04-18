@@ -18,4 +18,8 @@
 
 @property (nonatomic,assign) NSInteger film_id;
 
+@property(nonatomic,copy)NSString *release_date;
+
+@property(nonatomic,assign)NSInteger wanttosee;
+
 @end

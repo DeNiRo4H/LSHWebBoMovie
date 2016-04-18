@@ -16,23 +16,18 @@
 #import "MovieListTableViewCell.h"
 #import "Header.h"
 #import "LSHSegmentView.h"
+#import "LSHMovieTool.h"
+#import "FilmListModel.h"
 
 static const int tableViewTag = 90;
 //头上的三个标题
-typedef enum titleType{
-    HotMovie = 0,
-    Advance,
-    MovieList,
-}TitleType;
 
-
-@interface LSHHotMovieViewController()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+@interface LSHHotMovieViewController()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate>
 
 @property(nonatomic, strong)UIScrollView *scrollView;
 @property(nonatomic, strong)NSMutableArray *dataSources;
-@property(nonatomic, strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong)LSHSegmentView *titleView;
-
+@property(nonatomic, strong)LSHMovieTool *movieTool;
 @end
 
 @implementation LSHHotMovieViewController
@@ -40,26 +35,11 @@ typedef enum titleType{
     
     [self navigationTitleView];
     [self createScrollView];
-    //加载数据(初始加载热门电影)
-    [self loadDataWithType:HotMovie];
-
-}
-
--(AFHTTPRequestOperationManager *)manager{
     
-    if(_manager == nil){
-        
-        _manager = [AFHTTPRequestOperationManager manager];
-        
-        //设置成json解析器(第三方解析)
-        _manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        
-        [_manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
-    }
-    return _manager;
+    //加载数据(初始加载热门电影)
+    [self loadMovieDataComplicate:nil type:HotMovie next:NO];
+
 }
-
-
 
 - (NSMutableArray *)dataSources{
     if (_dataSources == nil) {
@@ -77,7 +57,7 @@ typedef enum titleType{
         NSLog(@"---%ld",index);
         self.scrollView.contentOffset = CGPointMake((index-1) * WIDTH, 0);
         if ([self.dataSources[index-1]count] == 0) {
-            [self loadDataWithType:(TitleType)index-1];
+            [self loadMovieDataComplicate:nil type:(TitleType)index-1 next:NO];
         }
     }];
     
@@ -160,51 +140,27 @@ typedef enum titleType{
     
 }
 
-
-#pragma mark - 加载dataSource
-//根据类型(哪个tabview)来加载数据
--(void)loadDataWithType:(TitleType )type{
-    
-    NSString *baseUrl = @"http://ting.weibo.com/movieapp/rank/";
-    NSString *URL = nil;
-    if (type == HotMovie) {
-        URL = [NSString stringWithFormat:@"%@%@",baseUrl,@"hot"];
-    }else if (type == Advance){
-       URL = [NSString stringWithFormat:@"%@%@",baseUrl,@"coming"];
+//加载数据 重新加载数据
+-(void)loadMovieDataComplicate:(void(^)())complicate type:(TitleType)type next:(BOOL)isNext{
+    if (self.movieTool == nil) {
+        self.movieTool = [[LSHMovieTool alloc]init];
     }
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:@{@"page":@"1",@"number":@"5"}];
     
-    [self.manager POST:URL parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (type == HotMovie) {
-            NSArray *array = responseObject[@"data"][@"ranklist_hot"];
-            for(NSDictionary *key in array){
-                FilmModel *model = [[FilmModel alloc]init];
-                //属性一一对应
-                [model setValuesForKeysWithDictionary:key];
-                [self.dataSources[type] addObject:model];
-            }
-        }else if (type == Advance){
-        
-            NSArray *array = responseObject[@"data"][@"ranklist_coming"];
-           
-            for(NSDictionary *key in array){
-              AdvanceModel *model = [[AdvanceModel alloc]init];
-                //属性一一对应
-                [model setValuesForKeysWithDictionary:key];
-                [self.dataSources[type] addObject:model];
-            }
+    [self.movieTool movieDataDownloadNext:isNext complicate:^(BOOL success, id data) {
+        if (isNext) {
+            [self.dataSources[type] addObjectsFromArray:data];
+        }else{
+            //第一页
+            [self.dataSources[type] removeAllObjects];
+            [self.dataSources[type] addObjectsFromArray:data];
+            
         }
-        
-        //刷新tableview
-        [[self tableViewWithType:type] reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    
-        LSHLog(@"%@", error);
-    }];
-    
+        [[self tableViewWithType:type]reloadData];
 
+    } TYPE:type];
+    
 }
+
 
 -(UITableView  *)tableViewWithType:(TitleType)type{
     return (UITableView *)[self.scrollView viewWithTag:
@@ -221,7 +177,8 @@ typedef enum titleType{
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if ((tableView.tag - tableViewTag) == Advance) {
+    TitleType type = tableView.tag - tableViewTag;
+    if (type == Advance) {
         AdvanceTableViewCell *cell = [AdvanceTableViewCell cellWithTableView:tableView];
         
         AdvanceModel *model = self.dataSources[tableView.tag - tableViewTag][indexPath.row];
@@ -230,16 +187,41 @@ typedef enum titleType{
         
         return cell;
         
-    }else if ((tableView.tag - tableViewTag) == HotMovie){
+    }else if (type == HotMovie){
         HotMovieTableViewCell *cell = [HotMovieTableViewCell cellWithTableView:tableView];
         
         FilmModel *model = self.dataSources[tableView.tag - tableViewTag][indexPath.row];
         cell.model = model;
         return cell;
         
-    }else{
+    }else if(type == MovieList){
         MovieListTableViewCell *cell = [MovieListTableViewCell cellWithTableView:tableView];
+        FilmListModel *model = self.dataSources[tableView.tag - tableViewTag][indexPath.row];
+        cell.model = model;
+        
+        cell.delegate = self;
+        //cell 需要请求数据 cell中显示的电影需要网络请求
+        
+        if (model.films.count == 0) {
+            
+            [self.movieTool loadFilmListWithId:cell.model.pagelist_id complicate:^(BOOL success, id data) {
+                if (success) {
+                    if (cell.model == model) {//请求到数据刷新
+                        cell.model.films = [NSMutableArray arrayWithArray:data];
+                        [cell.collectionView reloadData];
+                        
+                    }
+                }
+                
+            }];
+            
+        }
+        
         return cell;
+
+        
+        
+        
     }
     return nil;
     

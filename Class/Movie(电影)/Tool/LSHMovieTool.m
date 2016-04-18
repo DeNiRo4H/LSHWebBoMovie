@@ -1,0 +1,144 @@
+//
+//  LSHMovieTool.m
+//  LSHWebMovie
+//
+//  Created by kiki on 16/4/19.
+//  Copyright © 2016年 LSH. All rights reserved.
+//
+
+#import "LSHMovieTool.h"
+#import "AFNetworking.h"
+#import "LSHHTTPTool.h"
+#import "FilmListModel.h"
+#import "FilmModel.h"
+
+@interface LSHMovieTool()
+
+@property(nonatomic, strong)AFHTTPRequestOperationManager *manager;
+@end
+
+@implementation LSHMovieTool
+
+- (instancetype)init{
+
+    if (self = [super init]) {
+        _page[0] = 1;
+        _page[1] = 1;
+        _page[2] = 1;
+    }
+    return self;
+}
+// 懒加载
+-(AFHTTPRequestOperationManager *)manager{
+    
+    if(_manager == nil){
+        
+        _manager = [AFHTTPRequestOperationManager manager];
+        
+        //设置成json解析器(第三方解析)
+        _manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        [_manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
+    }
+    return _manager;
+}
+
+
+//下载 对应数据     是下一页还是  刷新
+- (void)movieDataDownloadNext:(BOOL)ret complicate:(Complicate) complicate TYPE:(TitleType)type{
+    NSString * urlStr = nil;
+    switch (type) {
+        case HotMovie:
+        {
+            urlStr =  FIRSTPAGE;
+        }
+            break;
+        case Advance:
+        {
+            urlStr = SECONDPAGE;
+        }
+            break;
+        case MovieList:
+        {
+            urlStr = THIRDPAGE;
+        }
+            break;
+        default:
+            break;
+    }
+    if (ret) {//如果是下一页
+        _page[type] ++;
+    }else{
+        _page[type] = 1;
+    }
+    NSDictionary *dic = @{@"page":@(_page[type])};
+    
+    [LSHHTTPTool postWithURL:urlStr params:dic success:^(id json) {
+    //解析
+    switch (type) {
+        case HotMovie:
+        case Advance:
+        {
+            NSString * key = @[@"ranklist_hot",@"ranklist_coming"][type];
+            NSArray * array = json[@"data"][key];
+            NSMutableArray * models = [NSMutableArray arrayWithCapacity:array.count];
+            
+            for (NSDictionary * dic in array ) {
+                FilmModel * model = [[FilmModel alloc] init];
+                [model setValuesForKeysWithDictionary:dic];
+                [models addObject:model];
+            }
+            complicate(YES,models);
+        }
+            break;
+        case MovieList:
+        {
+            NSArray * array = json[@"data"][@"list"];
+            NSMutableArray * models = [NSMutableArray arrayWithCapacity:array.count];
+#pragma warming 使用的是KVC,待改
+            for (NSDictionary * dic in array ) {
+                FilmListModel * model = [[FilmListModel alloc] init];
+                [model setValuesForKeysWithDictionary:dic];
+                model.user = [[UserModel alloc] init];
+                [model.user setValuesForKeysWithDictionary:dic[@"user"]];
+                [models addObject:model];
+            }
+            complicate(YES,models);
+        }
+            break;
+        default:
+            break;
+    }
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
+//获取影单
+- (void)loadFilmListWithId:(NSString *)listID complicate:(Complicate)complicate{
+    LSHLog(@"%@------", listID);
+    NSDictionary *dic = @{@"id":listID};
+    [LSHHTTPTool postWithURL:FILMLIST params:dic success:^(id json) {
+     
+            NSArray * array = json[@"data"][@"list"];
+            NSMutableArray * models = [NSMutableArray arrayWithCapacity:array.count];
+            for (NSDictionary * dic in array ) {
+                FilmModel * model = [[FilmModel alloc] init];
+                [model setValuesForKeysWithDictionary:dic];
+                [models addObject:model];
+            }
+            if (complicate) {
+                complicate(YES,models);
+            }
+        
+    } failure:^(NSError *error) {
+        LSHLog(@"%@",error);
+    }];
+    
+
+}
+
+
+
+@end
