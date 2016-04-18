@@ -76,7 +76,9 @@ typedef enum titleType{
     LSHSegmentView * titleView = [[LSHSegmentView alloc]initWithFrame:CGRectMake(0, 0, KscreenWidth-30, 44) titles:titles clickBlick:^(NSInteger index) {
         NSLog(@"---%ld",index);
         self.scrollView.contentOffset = CGPointMake((index-1) * WIDTH, 0);
-        [self loadDataWithType:(TitleType)index-1];
+        if ([self.dataSources[index-1]count] == 0) {
+            [self loadDataWithType:(TitleType)index-1];
+        }
     }];
     
     self.titleView = titleView;
@@ -184,7 +186,7 @@ typedef enum titleType{
         }else if (type == Advance){
         
             NSArray *array = responseObject[@"data"][@"ranklist_coming"];
-            NSLog(@"%@",array);
+           
             for(NSDictionary *key in array){
               AdvanceModel *model = [[AdvanceModel alloc]init];
                 //属性一一对应
