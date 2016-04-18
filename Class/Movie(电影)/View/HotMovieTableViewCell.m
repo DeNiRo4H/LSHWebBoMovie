@@ -7,13 +7,23 @@
 //
 
 #import "HotMovieTableViewCell.h"
-
+#import "Header.h"
 @implementation HotMovieTableViewCell
 {
     UILabel *_nameLabel;
     UILabel *_scoreLabel;
     UIImageView *_headImage;
     UIButton *_button;
+}
+#pragma mark - 初始化
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"cellID";
+    HotMovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[HotMovieTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+    }
+    return cell;
 }
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -29,11 +39,9 @@
 }
 
 -(void)createSubView{
-     //注意：任何尺寸的屏幕都为320
+  
     
-//    NSLog(@"%f",self.contentView.frame.size.width);
-    
-    _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,375, 150)];
+    _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,KscreenWidth, 150)];
     _scoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 100, 100, 30)];
     _scoreLabel.textColor = [UIColor yellowColor];
     _scoreLabel.font = [UIFont boldSystemFontOfSize:30];
@@ -46,9 +54,6 @@
     _button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 150)];
     
     [_button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
     
     [self.contentView addSubview:_headImage];
     [self.contentView addSubview:_scoreLabel];
@@ -72,15 +77,12 @@
 
 -(void)clickButton:(UIButton *)button{
 
-//    if([self.delegate respondsToSelector:@selector(jumpToAnotherPage:)]){
+    if([self.delegate respondsToSelector:@selector(jumpToAnotherPage:)]){
     
         [self.delegate jumpToAnotherPage:self.model];
-//    }
+    }
 
 }
-
-
-
 
 
 

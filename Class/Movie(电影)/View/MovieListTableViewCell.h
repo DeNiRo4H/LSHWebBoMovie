@@ -10,4 +10,6 @@
 
 @interface MovieListTableViewCell : UITableViewCell
 
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
 @end

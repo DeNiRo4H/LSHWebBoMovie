@@ -12,6 +12,8 @@
 
 @interface AdvanceTableViewCell : UITableViewCell
 
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
 @property(nonatomic, strong)AdvanceModel *model;
 
 @end

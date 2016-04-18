@@ -1,0 +1,18 @@
+//
+//  pchHeader.pch
+//  LSHWebMovie
+//
+//  Created by kiki on 16/4/17.
+//  Copyright © 2016年 LSH. All rights reserved.
+//
+
+#ifndef pchHeader_pch
+#define pchHeader_pch
+
+// 3.自定义Log
+#ifdef DEBUG
+#define LSHLog(...) NSLog(__VA_ARGS__)
+#else
+#define LSHLog(...)
+#endif
+#endif /* pchHeader_pch */

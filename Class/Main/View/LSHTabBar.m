@@ -8,7 +8,6 @@
 
 #import "LSHTabBar.h"
 #import "LSHTabBarButton.h"
-//test
 
 @interface LSHTabBar()
 @property (nonatomic, strong) NSMutableArray *tabBarButtons;
@@ -66,7 +65,6 @@
         [self buttonClick:button];
     }
 }
-
 - (void)plusButtonClick
 {
     if ([self.delegate respondsToSelector:@selector(tabBarDidClickedPlusButton:)]) {

@@ -7,6 +7,7 @@
 //
 
 #import "AdvanceTableViewCell.h"
+#import "Header.h"
 
 @implementation AdvanceTableViewCell
 {
@@ -15,6 +16,18 @@
     UILabel *_release_dateLabel;
     UIImageView *_headImage;
 }
+
+#pragma mark - 初始化
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *ID = @"cellID";
+    AdvanceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[AdvanceTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+    }
+    return cell;
+}
+
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
@@ -29,11 +42,8 @@
 }
 
 -(void)createSubView{
-    //注意：任何尺寸的屏幕都为320
-    
-    //    NSLog(@"%f",self.contentView.frame.size.width);
-    
-    _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,375, 150)];
+ 
+    _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0,KscreenWidth, 150)];
 
     
     _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20,  90, 180, 30)];
