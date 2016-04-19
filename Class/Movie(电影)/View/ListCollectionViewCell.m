@@ -13,7 +13,7 @@
 @implementation ListCollectionViewCell
 - (void)setModel:(FilmModel *)model{
     _model = model;
-    [_FilmImage sd_setImageWithURL:[NSURL URLWithString:model.poster_url]];
+    [_FilmImage sd_setImageWithURL:[NSURL URLWithString:model.poster_url] placeholderImage:[UIImage imageNamed:@"weibo_movie_empty_"]];
     _filmName.text = model.name;
 
 }

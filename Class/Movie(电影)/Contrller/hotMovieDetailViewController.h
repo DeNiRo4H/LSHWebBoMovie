@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HotMovieViewController.h"
 #import "FilmModel.h"
 
 @interface hotMovieDetailViewController : UIViewController

@@ -65,7 +65,7 @@ static NSString *cellID = @"cellID";
     if (_collectionView == nil) {
         
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.itemSize = CGSizeMake(KscreenWidth / 4 -10, 170);
+        layout.itemSize = CGSizeMake(KscreenWidth / 4 -10, 162);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         layout.minimumInteritemSpacing = 0;

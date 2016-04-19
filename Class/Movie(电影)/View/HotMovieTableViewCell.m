@@ -8,6 +8,7 @@
 
 #import "HotMovieTableViewCell.h"
 #import "Header.h"
+#import "UIImageView+WebCache.h"
 @implementation HotMovieTableViewCell
 {
     UILabel *_nameLabel;
@@ -70,7 +71,7 @@
      _model = model;
     
     /*------不用在这里显示图片()-------*/
-    [_headImage setImageWithURL:[NSURL URLWithString:model.poster_url]];
+    [_headImage sd_setImageWithURL:[NSURL URLWithString:model.poster_url] placeholderImage:[UIImage imageNamed:@"movie_images_zhezhao"]];
     
 }
 
