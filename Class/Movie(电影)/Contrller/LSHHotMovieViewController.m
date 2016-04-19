@@ -32,7 +32,7 @@ static const int tableViewTag = 90;
 
 @implementation LSHHotMovieViewController
 - (void)viewDidLoad{
-    
+    [super viewDidLoad];
     [self navigationTitleView];
     [self createScrollView];
     
@@ -54,7 +54,7 @@ static const int tableViewTag = 90;
     NSArray *titles = @[@"热映",@"预告",@"影单"];
     
     LSHSegmentView * titleView = [[LSHSegmentView alloc]initWithFrame:CGRectMake(0, 0, KscreenWidth-30, 44) titles:titles clickBlick:^(NSInteger index) {
-        NSLog(@"---%ld",index);
+        
         self.scrollView.contentOffset = CGPointMake((index-1) * WIDTH, 0);
         if ([self.dataSources[index-1]count] == 0) {
             [self loadMovieDataComplicate:nil type:(TitleType)index-1 next:NO];
@@ -127,8 +127,6 @@ static const int tableViewTag = 90;
         
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
-        tableView.rowHeight = 150;
-        
         tableView.delegate = self;
         tableView.dataSource = self;
         
@@ -170,6 +168,14 @@ static const int tableViewTag = 90;
 
 #pragma mark - tableView 协议方法
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    TitleType type = tableView.tag - tableViewTag;
+    if (type == MovieList) {
+        return 250;
+    }
+    return 150;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return [self.dataSources[tableView.tag - tableViewTag]count];
@@ -197,6 +203,7 @@ static const int tableViewTag = 90;
     }else if(type == MovieList){
         MovieListTableViewCell *cell = [MovieListTableViewCell cellWithTableView:tableView];
         FilmListModel *model = self.dataSources[tableView.tag - tableViewTag][indexPath.row];
+        
         cell.model = model;
         
         cell.delegate = self;

@@ -97,14 +97,14 @@
     }
     
     //计算偏移量
-    CGFloat offsetX  =  btn.frame.origin.x - 2*_btn_w;
-    if (offsetX < 0) {
-        offsetX = 0;
-    }
-    CGFloat maxOffsetX =  _bgScrollView.contentSize.width-windowContentWidth;
-    if (offsetX>maxOffsetX) {
-        offsetX = maxOffsetX;
-    }
+//    CGFloat offsetX  =  btn.frame.origin.x - 2*_btn_w;
+//    if (offsetX < 0) {
+//        offsetX = 0;
+//    }
+//    CGFloat maxOffsetX =  _bgScrollView.contentSize.width-windowContentWidth;
+//    if (offsetX > maxOffsetX) {
+//        offsetX = maxOffsetX;
+//    }
     
     [UIView animateWithDuration:0.2 animations:^{
         

@@ -13,8 +13,6 @@
 #import "FilmModel.h"
 
 @interface LSHMovieTool()
-
-@property(nonatomic, strong)AFHTTPRequestOperationManager *manager;
 @end
 
 @implementation LSHMovieTool
@@ -28,21 +26,6 @@
     }
     return self;
 }
-// 懒加载
--(AFHTTPRequestOperationManager *)manager{
-    
-    if(_manager == nil){
-        
-        _manager = [AFHTTPRequestOperationManager manager];
-        
-        //设置成json解析器(第三方解析)
-        _manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        
-        [_manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
-    }
-    return _manager;
-}
-
 
 //下载 对应数据     是下一页还是  刷新
 - (void)movieDataDownloadNext:(BOOL)ret complicate:(Complicate) complicate TYPE:(TitleType)type{
@@ -117,19 +100,20 @@
 
 //获取影单
 - (void)loadFilmListWithId:(NSString *)listID complicate:(Complicate)complicate{
-    LSHLog(@"%@------", listID);
+    
     NSDictionary *dic = @{@"id":listID};
     [LSHHTTPTool postWithURL:FILMLIST params:dic success:^(id json) {
      
             NSArray * array = json[@"data"][@"list"];
-            NSMutableArray * models = [NSMutableArray arrayWithCapacity:array.count];
+            NSMutableArray * filmModels = [NSMutableArray arrayWithCapacity:array.count];
             for (NSDictionary * dic in array ) {
                 FilmModel * model = [[FilmModel alloc] init];
                 [model setValuesForKeysWithDictionary:dic];
-                [models addObject:model];
+                //电影模型数组
+                [filmModels addObject:model];
             }
             if (complicate) {
-                complicate(YES,models);
+                complicate(YES,filmModels);
             }
         
     } failure:^(NSError *error) {
