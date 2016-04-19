@@ -10,9 +10,11 @@
 @class FilmListModel;
 
 @interface MovieListTableViewCell : UITableViewCell<UICollectionViewDataSource>
+@property (weak, nonatomic) IBOutlet UILabel *rand;
+@property (weak, nonatomic) IBOutlet UILabel *nameAndPerson;
 
 @property (weak, nonatomic) IBOutlet UILabel *name;
-@property (weak, nonatomic) IBOutlet UILabel *rand;
+
 
 @property(nonatomic, strong)UICollectionView *collectionView;
 @property(nonatomic, strong) FilmListModel *model;

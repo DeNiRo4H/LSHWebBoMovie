@@ -18,26 +18,27 @@
 #import "LSHSegmentView.h"
 #import "LSHMovieTool.h"
 #import "FilmListModel.h"
+#import "DJRefresh.h"
 
 static const int tableViewTag = 90;
-//头上的三个标题
 
-@interface LSHHotMovieViewController()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate>
+@interface LSHHotMovieViewController()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UICollectionViewDelegate,DJRefreshDelegate>
 
 @property(nonatomic, strong)UIScrollView *scrollView;
 @property(nonatomic, strong)NSMutableArray *dataSources;
 @property(nonatomic, strong)LSHSegmentView *titleView;
 @property(nonatomic, strong)LSHMovieTool *movieTool;
+@property(nonatomic, strong)NSMutableArray *refreshArr;
 @end
 
 @implementation LSHHotMovieViewController
 - (void)viewDidLoad{
-    
+    [super viewDidLoad];
     [self navigationTitleView];
     [self createScrollView];
     
     //加载数据(初始加载热门电影)
-    [self loadMovieDataComplicate:nil type:HotMovie next:NO];
+    [self loadMovieDataFinishRefresh:nil type:HotMovie next:NO];
 
 }
 
@@ -48,16 +49,25 @@ static const int tableViewTag = 90;
     return _dataSources;
 }
 
+- (NSMutableArray *)refreshArr{
+    if (!_refreshArr) {
+        _refreshArr = [NSMutableArray array];
+    }
+    return _refreshArr;
+}
+
+
+
 #pragma mark 导航栏上的item
 - (void)navigationTitleView{
  
     NSArray *titles = @[@"热映",@"预告",@"影单"];
     
     LSHSegmentView * titleView = [[LSHSegmentView alloc]initWithFrame:CGRectMake(0, 0, KscreenWidth-30, 44) titles:titles clickBlick:^(NSInteger index) {
-        NSLog(@"---%ld",index);
+        
         self.scrollView.contentOffset = CGPointMake((index-1) * WIDTH, 0);
         if ([self.dataSources[index-1]count] == 0) {
-            [self loadMovieDataComplicate:nil type:(TitleType)index-1 next:NO];
+            [self loadMovieDataFinishRefresh:nil type:(TitleType)index-1 next:NO];
         }
     }];
     
@@ -122,26 +132,46 @@ static const int tableViewTag = 90;
         [self.dataSources addObject:array];
         
         UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(i*self.scrollView.frame.size.width, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height) style:UITableViewStylePlain];
-        
         tableView.tag = i + tableViewTag;
-        
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-        tableView.rowHeight = 150;
         
         tableView.delegate = self;
         tableView.dataSource = self;
-        
         tableView.backgroundColor = [UIColor grayColor];
+        
+        DJRefresh *refresh = [[DJRefresh alloc]initWithScrollView:tableView delegate:self];
+        refresh.topEnabled = YES;
+        refresh.bottomEnabled = YES;
+        [self.refreshArr addObject:refresh];
         
         [self.scrollView addSubview:tableView];
 
     }
+}
+
+/*
+ 刷新控件的代理方法
+ */
+- (void)refresh:(DJRefresh *)refresh didEngageRefreshDirection:(DJRefreshDirection) direction{
+  
+    void (^isFinishRefresh)();
+    isFinishRefresh = ^{
+        [refresh finishRefreshing];
+    };
+    
+    if (direction == DJRefreshDirectionTop) {
+        
+        [self loadMovieDataFinishRefresh:isFinishRefresh type:refresh.scrollView.tag - tableViewTag next:NO];
+        
+    }else{
+        [self loadMovieDataFinishRefresh:isFinishRefresh type:refresh.scrollView.tag - tableViewTag next:YES];
+    }
     
 }
 
+
 //加载数据 重新加载数据
--(void)loadMovieDataComplicate:(void(^)())complicate type:(TitleType)type next:(BOOL)isNext{
+-(void)loadMovieDataFinishRefresh:(void(^)())isFinishRefresh type:(TitleType)type next:(BOOL)isNext{
     if (self.movieTool == nil) {
         self.movieTool = [[LSHMovieTool alloc]init];
     }
@@ -156,6 +186,9 @@ static const int tableViewTag = 90;
             
         }
         [[self tableViewWithType:type]reloadData];
+        if (isFinishRefresh) {
+            isFinishRefresh();
+        }
 
     } TYPE:type];
     
@@ -169,6 +202,14 @@ static const int tableViewTag = 90;
 
 
 #pragma mark - tableView 协议方法
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    TitleType type = tableView.tag - tableViewTag;
+    if (type == MovieList) {
+        return 250;
+    }
+    return 150;
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -197,6 +238,7 @@ static const int tableViewTag = 90;
     }else if(type == MovieList){
         MovieListTableViewCell *cell = [MovieListTableViewCell cellWithTableView:tableView];
         FilmListModel *model = self.dataSources[tableView.tag - tableViewTag][indexPath.row];
+        
         cell.model = model;
         
         cell.delegate = self;

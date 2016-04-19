@@ -1074,9 +1074,7 @@
 		2720BF651CBC0D19004C635D /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF3D1CBC0D19004C635D /* AddViewController.m */; settings = {ASSET_TAGS = (); }; };
 		2720BF661CBC0D19004C635D /* BuyTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF431CBC0D19004C635D /* BuyTicketViewController.m */; settings = {ASSET_TAGS = (); }; };
 		2720BF671CBC0D19004C635D /* FilmReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF491CBC0D19004C635D /* FilmReviewViewController.m */; settings = {ASSET_TAGS = (); }; };
-		2720BF681CBC0D19004C635D /* AdvanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF501CBC0D19004C635D /* AdvanceViewController.m */; settings = {ASSET_TAGS = (); }; };
 		2720BF691CBC0D19004C635D /* hotMovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF521CBC0D19004C635D /* hotMovieDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
-		2720BF6A1CBC0D19004C635D /* HotMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF541CBC0D19004C635D /* HotMovieViewController.m */; settings = {ASSET_TAGS = (); }; };
 		2720BF6B1CBC0D19004C635D /* AdvanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF571CBC0D19004C635D /* AdvanceModel.m */; settings = {ASSET_TAGS = (); }; };
 		2720BF6C1CBC0D19004C635D /* FilmModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF591CBC0D19004C635D /* FilmModel.m */; settings = {ASSET_TAGS = (); }; };
 		2720BF6D1CBC0D19004C635D /* FMDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF5B1CBC0D19004C635D /* FMDBManager.m */; settings = {ASSET_TAGS = (); }; };
@@ -1105,6 +1103,7 @@
 		2725900E1C26481D0029A64E /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 27258FFB1C26481D0029A64E /* UIProgressView+AFNetworking.m */; };
 		2725900F1C26481D0029A64E /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 27258FFD1C26481D0029A64E /* UIRefreshControl+AFNetworking.m */; };
 		272590101C26481D0029A64E /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 27258FFF1C26481D0029A64E /* UIWebView+AFNetworking.m */; };
+		2774DC041CC6A08D00E4AA86 /* UIImage+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 2774DC031CC6A08D00E4AA86 /* UIImage+MJ.m */; settings = {ASSET_TAGS = (); }; };
 		27AF2FF71CC56DFB0027E530 /* MovieListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27AF2FF61CC56DFB0027E530 /* MovieListTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		27AF2FFB1CC5758D0027E530 /* ListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AF2FF91CC5758D0027E530 /* ListCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		27AF2FFC1CC5758D0027E530 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27AF2FFA1CC5758D0027E530 /* ListCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -2248,12 +2247,8 @@
 		2720BF431CBC0D19004C635D /* BuyTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketViewController.m; sourceTree = "<group>"; };
 		2720BF481CBC0D19004C635D /* FilmReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmReviewViewController.h; sourceTree = "<group>"; };
 		2720BF491CBC0D19004C635D /* FilmReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmReviewViewController.m; sourceTree = "<group>"; };
-		2720BF4F1CBC0D19004C635D /* AdvanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvanceViewController.h; sourceTree = "<group>"; };
-		2720BF501CBC0D19004C635D /* AdvanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvanceViewController.m; sourceTree = "<group>"; };
 		2720BF511CBC0D19004C635D /* hotMovieDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotMovieDetailViewController.h; sourceTree = "<group>"; };
 		2720BF521CBC0D19004C635D /* hotMovieDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotMovieDetailViewController.m; sourceTree = "<group>"; };
-		2720BF531CBC0D19004C635D /* HotMovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotMovieViewController.h; sourceTree = "<group>"; };
-		2720BF541CBC0D19004C635D /* HotMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotMovieViewController.m; sourceTree = "<group>"; };
 		2720BF561CBC0D19004C635D /* AdvanceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvanceModel.h; sourceTree = "<group>"; };
 		2720BF571CBC0D19004C635D /* AdvanceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvanceModel.m; sourceTree = "<group>"; };
 		2720BF581CBC0D19004C635D /* FilmModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmModel.h; sourceTree = "<group>"; };
@@ -2312,6 +2307,8 @@
 		27258FFD1C26481D0029A64E /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		27258FFE1C26481D0029A64E /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		27258FFF1C26481D0029A64E /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		2774DC021CC6A08D00E4AA86 /* UIImage+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MJ.h"; sourceTree = "<group>"; };
+		2774DC031CC6A08D00E4AA86 /* UIImage+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MJ.m"; sourceTree = "<group>"; };
 		27AF2FF61CC56DFB0027E530 /* MovieListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieListTableViewCell.xib; sourceTree = "<group>"; };
 		27AF2FF81CC5758D0027E530 /* ListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionViewCell.h; sourceTree = "<group>"; };
 		27AF2FF91CC5758D0027E530 /* ListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionViewCell.m; sourceTree = "<group>"; };
@@ -3725,12 +3722,8 @@
 		2720BF4E1CBC0D19004C635D /* Contrller */ = {
 			isa = PBXGroup;
 			children = (
-				2720BF4F1CBC0D19004C635D /* AdvanceViewController.h */,
-				2720BF501CBC0D19004C635D /* AdvanceViewController.m */,
 				2720BF511CBC0D19004C635D /* hotMovieDetailViewController.h */,
 				2720BF521CBC0D19004C635D /* hotMovieDetailViewController.m */,
-				2720BF531CBC0D19004C635D /* HotMovieViewController.h */,
-				2720BF541CBC0D19004C635D /* HotMovieViewController.m */,
 				2717F35F1CBEC08A00686169 /* LSHHotMovieViewController.h */,
 				2717F3601CBEC08A00686169 /* LSHHotMovieViewController.m */,
 			);
@@ -3867,6 +3860,15 @@
 				27258FFF1C26481D0029A64E /* UIWebView+AFNetworking.m */,
 			);
 			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		2774DC011CC6A08D00E4AA86 /* category */ = {
+			isa = PBXGroup;
+			children = (
+				2774DC021CC6A08D00E4AA86 /* UIImage+MJ.h */,
+				2774DC031CC6A08D00E4AA86 /* UIImage+MJ.m */,
+			);
+			path = category;
 			sourceTree = "<group>";
 		};
 		27AF2FFD1CC57F110027E530 /* SDWebImage */ = {
@@ -4021,6 +4023,7 @@
 		4ED2B5F11C253DFA00403E7C /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				2774DC011CC6A08D00E4AA86 /* category */,
 				27AF2FFD1CC57F110027E530 /* SDWebImage */,
 				27171A2D1CC21DFD00FB8D21 /* LSHLib */,
 				2717F31C1CBEB9BF00686169 /* MBProgressHUD */,
@@ -5233,6 +5236,7 @@
 				2725900E1C26481D0029A64E /* UIProgressView+AFNetworking.m in Sources */,
 				2725900F1C26481D0029A64E /* UIRefreshControl+AFNetworking.m in Sources */,
 				4E7ECC251C298A0E0009523D /* FMDatabase.m in Sources */,
+				2774DC041CC6A08D00E4AA86 /* UIImage+MJ.m in Sources */,
 				272590101C26481D0029A64E /* UIWebView+AFNetworking.m in Sources */,
 				27AF30241CC57F110027E530 /* SDWebImageDownloader.m in Sources */,
 				4ED2B6371C253DFA00403E7C /* DJRefresh.m in Sources */,
@@ -5260,7 +5264,6 @@
 				272590021C26481D0029A64E /* AFHTTPSessionManager.m in Sources */,
 				27AF301F1CC57F110027E530 /* MKAnnotationView+WebCache.m in Sources */,
 				272590001C26481D0029A64E /* AFHTTPRequestOperation.m in Sources */,
-				2720BF681CBC0D19004C635D /* AdvanceViewController.m in Sources */,
 				2720BF6C1CBC0D19004C635D /* FilmModel.m in Sources */,
 				27DF14051CC55033004EC53A /* FilmListModel.m in Sources */,
 				2720BF671CBC0D19004C635D /* FilmReviewViewController.m in Sources */,
@@ -5297,7 +5300,6 @@
 				27AF30211CC57F110027E530 /* SDImageCache.m in Sources */,
 				27AF30251CC57F110027E530 /* SDWebImageDownloaderOperation.m in Sources */,
 				2725900C1C26481D0029A64E /* UIButton+AFNetworking.m in Sources */,
-				2720BF6A1CBC0D19004C635D /* HotMovieViewController.m in Sources */,
 				2720BF7F1CBC0EA3004C635D /* LSHNavigationViewController.m in Sources */,
 				4E7ECC271C298A0E0009523D /* FMDatabasePool.m in Sources */,
 			);

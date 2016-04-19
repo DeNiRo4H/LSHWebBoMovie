@@ -7,6 +7,7 @@
 //
 
 #import "AdvanceTableViewCell.h"
+#import "UIImageView+WebCache.h"
 #import "Header.h"
 
 @implementation AdvanceTableViewCell
@@ -73,7 +74,8 @@
     
     _release_dateLabel.text = model.release_date;
     /*------不用在这里显示图片()-------*/
-    [_headImage setImageWithURL:[NSURL URLWithString:model.poster_url]];
+ 
+    [_headImage sd_setImageWithURL:[NSURL URLWithString:model.poster_url] placeholderImage:[UIImage imageNamed:@"movie_images_zhezhao"]];
     
 }
 
