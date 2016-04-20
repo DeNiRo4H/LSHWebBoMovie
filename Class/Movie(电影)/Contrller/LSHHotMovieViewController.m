@@ -8,9 +8,9 @@
 
 #import "LSHHotMovieViewController.h"
 #import "AFNetworking.h"
-#import "HotMovieTableViewCell.h"
+
 #import "AdvanceModel.h"
-#import "AdvanceTableViewCell.h"
+#import "LSHFilmCell.h"
 #import "FMDBManager.h"
 #import "hotMovieDetailViewController.h"
 #import "MovieListTableViewCell.h"
@@ -19,6 +19,7 @@
 #import "LSHMovieTool.h"
 #import "FilmListModel.h"
 #import "DJRefresh.h"
+
 
 static const int tableViewTag = 90;
 
@@ -219,20 +220,14 @@ static const int tableViewTag = 90;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TitleType type = tableView.tag - tableViewTag;
-    if (type == Advance) {
-        AdvanceTableViewCell *cell = [AdvanceTableViewCell cellWithTableView:tableView];
+    if (type == Advance || type == HotMovie) {
         
-        AdvanceModel *model = self.dataSources[tableView.tag - tableViewTag][indexPath.row];
-        
-        cell.model = model;
-        
-        return cell;
-        
-    }else if (type == HotMovie){
-        HotMovieTableViewCell *cell = [HotMovieTableViewCell cellWithTableView:tableView];
-        
+        LSHFilmCell *cell = [LSHFilmCell cellWithTableView:tableView];
+      
         FilmModel *model = self.dataSources[tableView.tag - tableViewTag][indexPath.row];
+        
         cell.model = model;
+        
         return cell;
         
     }else if(type == MovieList){

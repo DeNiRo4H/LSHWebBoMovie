@@ -27,6 +27,7 @@ static NSString *cellID = @"cellID";
   [tableView registerNib:[UINib nibWithNibName:@"MovieListTableViewCell"  bundle:nil] forCellReuseIdentifier:ID];
     
     MovieListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
         cell = [[MovieListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
