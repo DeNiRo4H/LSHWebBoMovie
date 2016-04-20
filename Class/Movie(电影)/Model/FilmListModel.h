@@ -8,9 +8,10 @@
 
 
 #import <Foundation/Foundation.h>
-@class UserModel;
+#import "LSHBaseModel.h"
+#import "UserModel.h"
 //影单
-@interface FilmListModel : NSObject
+@interface FilmListModel : LSHBaseModel
 @property(nonatomic,copy)NSString * name;
 @property(nonatomic,copy)NSString * pagelist_id;
 @property(nonatomic,strong)NSNumber * movie_count;
@@ -21,11 +22,4 @@
 @property(nonatomic,strong)NSMutableArray * films;
 @end
 
-//用户
-@interface UserModel : NSObject
 
-@property(nonatomic,copy)NSString * avatar_large;
-@property(nonatomic,copy)NSString * uid;
-@property(nonatomic,copy)NSString * name;
-
-@end

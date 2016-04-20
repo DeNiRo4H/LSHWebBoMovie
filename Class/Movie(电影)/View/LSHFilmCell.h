@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *wantoSee;
 @property (weak, nonatomic) IBOutlet UIImageView *dateIcon;
 @property (weak, nonatomic) IBOutlet UILabel *release_date;
+@property (weak, nonatomic) IBOutlet UIButton *loveBtn;
 
 @property(nonatomic, strong)FilmModel *model;
 + (instancetype)cellWithTableView:(UITableView *)tableView;

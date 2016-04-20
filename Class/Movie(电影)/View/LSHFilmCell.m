@@ -13,6 +13,7 @@
 
 @interface LSHFilmCell()
 @property(nonatomic, strong)UIImageView *bgView;
+
 @property(nonatomic, strong)UIView *view;
 
 @end
@@ -39,12 +40,12 @@
 - (void)setModel:(FilmModel *)model{
 
     _model = model;
+    
+    [self.bgView sd_setImageWithURL:[NSURL URLWithString:model.large_poster_url] placeholderImage:[UIImage imageNamed:@"movie_images_zhezhao"]];
   
-    [self.bgView sd_setImageWithURL:[NSURL URLWithString:model.large_poster_url] placeholderImage:[UIImage imageNamed:@""]];
-
-//    self.bgView.alpha = 0.88;
     if ([model.card_type isEqualToString:@"ranklist_hot"]) {
         self.score.text = model.score;
+          self.filmName.text = model.name;
         self.loveIcon.image = [UIImage imageNamed:@"home_comment"];
         self.wantoSee.text = [NSString stringWithFormat:@"%@人点评",model.score_count];
     }else{
@@ -65,9 +66,10 @@
 
     
     self.bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight)];
+    self.score.textColor = [UIColor colorWithRed:1.000f green:0.839f blue:0.267f alpha:1.00f];
+    self.bgView.alpha = 0.9;
     
-  
-    
+    [self.loveBtn setBackgroundImage:[UIImage imageNamed:@"home_interested_normal"] forState:UIControlStateNormal];
     [self setBackgroundView:self.bgView];
    
 }

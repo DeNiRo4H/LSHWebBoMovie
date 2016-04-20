@@ -8,8 +8,6 @@
 
 #import "LSHHotMovieViewController.h"
 #import "AFNetworking.h"
-
-#import "AdvanceModel.h"
 #import "LSHFilmCell.h"
 #import "FMDBManager.h"
 #import "hotMovieDetailViewController.h"

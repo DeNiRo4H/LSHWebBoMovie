@@ -12,6 +12,7 @@
 #import "FilmListModel.h"
 #import "FilmModel.h"
 
+
 @interface LSHMovieTool()
 @end
 
@@ -80,10 +81,11 @@
             NSMutableArray * models = [NSMutableArray arrayWithCapacity:array.count];
 #pragma warming 使用的是KVC,待改
             for (NSDictionary * dic in array ) {
-                FilmListModel * model = [[FilmListModel alloc] init];
-                [model setValuesForKeysWithDictionary:dic];
-                model.user = [[UserModel alloc] init];
-                [model.user setValuesForKeysWithDictionary:dic[@"user"]];
+                FilmListModel  *model = [[FilmListModel alloc]initWithDictionary:dic error:nil];
+//               FilmListModel  *model = [FilmListModel 
+//                [model setValuesForKeysWithDictionary:dic];
+//                model.user = [[UserModel alloc] init];
+//                [model.user setValuesForKeysWithDictionary:dic[@"user"]];
                 [models addObject:model];
             }
             complicate(YES,models);

@@ -30,21 +30,22 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "LSHBaseModel.h"
 
-@interface FilmModel : NSObject
+@interface FilmModel : LSHBaseModel
 
 @property(nonatomic,copy)NSString *  name;
 
 @property(nonatomic,copy)NSString *  poster_url;
 
 @property(nonatomic,copy)NSString *  score;
-@property(nonatomic,assign)NSNumber *  score_count;
+@property(nonatomic,strong)NSNumber *  score_count;
 @property(nonatomic,copy)NSString * large_poster_url;
 @property (nonatomic,assign) NSInteger film_id;
 
 @property(nonatomic,copy)NSString *release_date;
 
-@property(nonatomic,assign)NSNumber *wanttosee;
+@property(nonatomic,strong)NSNumber *wanttosee;
 
 @property(nonatomic, copy)NSString *card_type;
 

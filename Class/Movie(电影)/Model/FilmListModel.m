@@ -23,15 +23,7 @@
 @end
 
 
-@implementation UserModel
 
-
--(void)setValue:(id)value forUndefinedKey:(NSString *)key{
-    
-//    NSLog(@"%@",key);
-    
-}
-@end
 
 
 
