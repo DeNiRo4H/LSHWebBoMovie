@@ -10,6 +10,8 @@
 
 @implementation FilmModel
 
+
+
 //如果没有一一对应的话就会调用这个方法
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
     
