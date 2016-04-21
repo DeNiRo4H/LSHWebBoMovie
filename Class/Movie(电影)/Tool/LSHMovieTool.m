@@ -65,6 +65,7 @@
         {
             NSString * key = @[@"ranklist_hot",@"ranklist_coming"][type];
             NSArray * array = json[@"data"][key];
+             LSHLog(@"%@",array);
             NSMutableArray * models = [NSMutableArray arrayWithCapacity:array.count];
             
             for (NSDictionary * dic in array ) {
@@ -78,6 +79,7 @@
         case MovieList:
         {
             NSArray * array = json[@"data"][@"list"];
+           
             NSMutableArray * models = [NSMutableArray arrayWithCapacity:array.count];
 #pragma warming 使用的是KVC,待改
             for (NSDictionary * dic in array ) {

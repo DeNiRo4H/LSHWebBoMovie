@@ -13,7 +13,6 @@
 
 @interface LSHFilmCell()
 @property(nonatomic, strong)UIImageView *bgView;
-
 @property(nonatomic, strong)UIView *view;
 
 @end
@@ -23,15 +22,10 @@
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
     static NSString *ID = @"cellID";
-    
-    [tableView registerNib:[UINib nibWithNibName:@"LSHFilmCell"  bundle:nil] forCellReuseIdentifier:ID];
-    
     LSHFilmCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     if (cell == nil) {
-        cell = [[LSHFilmCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+        cell = (LSHFilmCell *)[[[NSBundle mainBundle]loadNibNamed:@"LSHFilmCell" owner:self options:nil] lastObject];
     }
     return cell;
 }
@@ -42,29 +36,23 @@
     _model = model;
     
     [self.bgView sd_setImageWithURL:[NSURL URLWithString:model.large_poster_url] placeholderImage:[UIImage imageNamed:@"movie_images_zhezhao"]];
-  
+     self.score.text = model.score;
+     self.filmName.text = model.name;
+    
     if ([model.card_type isEqualToString:@"ranklist_hot"]) {
-        self.score.text = model.score;
-          self.filmName.text = model.name;
         self.loveIcon.image = [UIImage imageNamed:@"home_comment"];
         self.wantoSee.text = [NSString stringWithFormat:@"%@人点评",model.score_count];
     }else{
-         self.score.text = model.score;
-        self.filmName.text = model.name;
         self.wantoSee.text = [model.wanttosee stringValue];
         self.release_date.text = model.release_date;
-        
         self.dateIcon.image = [UIImage imageNamed:@"weibo-movie_icon_time"];
         self.loveIcon.image = [UIImage imageNamed:@"home_interest"];
     }
 
 }
 
-
-
 - (void)awakeFromNib {
 
-    
     self.bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, KscreenWidth, KscreenHeight)];
     self.score.textColor = [UIColor colorWithRed:1.000f green:0.839f blue:0.267f alpha:1.00f];
     self.bgView.alpha = 0.9;

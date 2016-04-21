@@ -10,13 +10,13 @@
 #import "AFNetworking.h"
 #import "LSHFilmCell.h"
 #import "FMDBManager.h"
-#import "hotMovieDetailViewController.h"
 #import "MovieListTableViewCell.h"
 #import "Header.h"
 #import "LSHSegmentView.h"
 #import "LSHMovieTool.h"
 #import "FilmListModel.h"
 #import "DJRefresh.h"
+#import "LSHFilmDetailVC.h"
 
 
 static const int tableViewTag = 90;
@@ -221,11 +221,9 @@ static const int tableViewTag = 90;
     if (type == Advance || type == HotMovie) {
         
         LSHFilmCell *cell = [LSHFilmCell cellWithTableView:tableView];
-      
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         FilmModel *model = self.dataSources[tableView.tag - tableViewTag][indexPath.row];
-        
         cell.model = model;
-        
         return cell;
         
     }else if(type == MovieList){
@@ -253,16 +251,49 @@ static const int tableViewTag = 90;
         }
         
         return cell;
-
-        
-        
-        
     }
     return nil;
     
 }
+/*
+ 选中cell
+ */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES ];
+    TitleType type = tableView.tag - tableViewTag;
+    switch (type) {
+        case HotMovie:
+        case Advance:
+        {
+            FilmModel *model  =  self.dataSources[type][indexPath.row];
+            [self pushToFilmDetailVCWithModel:model];
+        }
+        case MovieList:
+          break;
+            
+        default:
+            break;
+    }
+   
 
-#pragma mark - UIScrollview代理方法
+    
+
+}
+
+#pragma mark - UICollectionView协议方法
+/*
+ collectionViewCell的代理方法是控制器
+ */
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    MovieListTableViewCell *cell = (MovieListTableViewCell *)[collectionView superview];
+    FilmModel *model = cell.model.films[indexPath.item];
+    
+    [self pushToFilmDetailVCWithModel:model];
+
+}
+
+
 
 #pragma mark - scrollviewdelegate协议方法
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -275,6 +306,15 @@ static const int tableViewTag = 90;
     }
     
 }
+
+- (void)pushToFilmDetailVCWithModel:(FilmModel *)model{
+    
+    LSHFilmDetailVC *detailVC = [[LSHFilmDetailVC alloc]init];
+    detailVC.model = model;
+    [self.navigationController pushViewController:detailVC animated:NO];
+    
+}
+
 
 
 @end

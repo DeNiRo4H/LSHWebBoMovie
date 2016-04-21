@@ -1074,7 +1074,6 @@
 		2720BF651CBC0D19004C635D /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF3D1CBC0D19004C635D /* AddViewController.m */; };
 		2720BF661CBC0D19004C635D /* BuyTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF431CBC0D19004C635D /* BuyTicketViewController.m */; };
 		2720BF671CBC0D19004C635D /* FilmReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF491CBC0D19004C635D /* FilmReviewViewController.m */; };
-		2720BF691CBC0D19004C635D /* hotMovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF521CBC0D19004C635D /* hotMovieDetailViewController.m */; };
 		2720BF6C1CBC0D19004C635D /* FilmModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF591CBC0D19004C635D /* FilmModel.m */; };
 		2720BF6D1CBC0D19004C635D /* FMDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF5B1CBC0D19004C635D /* FMDBManager.m */; };
 		2720BF701CBC0D19004C635D /* MovieListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720BF621CBC0D19004C635D /* MovieListTableViewCell.m */; };
@@ -1113,6 +1112,9 @@
 		276EAEE41CC803E800DAE82A /* LSHBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 276EAEE31CC803E800DAE82A /* LSHBaseModel.m */; settings = {ASSET_TAGS = (); }; };
 		276EAEE61CC8080600DAE82A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 276EAEE51CC8080600DAE82A /* libsqlite3.tbd */; };
 		2774DC041CC6A08D00E4AA86 /* UIImage+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 2774DC031CC6A08D00E4AA86 /* UIImage+MJ.m */; };
+		278C89E81CC9429900919F21 /* LSHFilmDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 278C89E71CC9429900919F21 /* LSHFilmDetailVC.m */; settings = {ASSET_TAGS = (); }; };
+		278C89EB1CC9628B00919F21 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 278C89EA1CC9628B00919F21 /* ParallaxHeaderView.m */; settings = {ASSET_TAGS = (); }; };
+		278C89F11CC9635500919F21 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 278C89F01CC9635500919F21 /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
 		27AF2FF71CC56DFB0027E530 /* MovieListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27AF2FF61CC56DFB0027E530 /* MovieListTableViewCell.xib */; };
 		27AF2FFB1CC5758D0027E530 /* ListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AF2FF91CC5758D0027E530 /* ListCollectionViewCell.m */; };
 		27AF2FFC1CC5758D0027E530 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27AF2FFA1CC5758D0027E530 /* ListCollectionViewCell.xib */; };
@@ -2257,8 +2259,6 @@
 		2720BF431CBC0D19004C635D /* BuyTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketViewController.m; sourceTree = "<group>"; };
 		2720BF481CBC0D19004C635D /* FilmReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmReviewViewController.h; sourceTree = "<group>"; };
 		2720BF491CBC0D19004C635D /* FilmReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmReviewViewController.m; sourceTree = "<group>"; };
-		2720BF511CBC0D19004C635D /* hotMovieDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotMovieDetailViewController.h; sourceTree = "<group>"; };
-		2720BF521CBC0D19004C635D /* hotMovieDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotMovieDetailViewController.m; sourceTree = "<group>"; };
 		2720BF581CBC0D19004C635D /* FilmModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmModel.h; sourceTree = "<group>"; };
 		2720BF591CBC0D19004C635D /* FilmModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmModel.m; sourceTree = "<group>"; };
 		2720BF5A1CBC0D19004C635D /* FMDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBManager.h; sourceTree = "<group>"; };
@@ -2336,6 +2336,12 @@
 		276EAEE51CC8080600DAE82A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		2774DC021CC6A08D00E4AA86 /* UIImage+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MJ.h"; sourceTree = "<group>"; };
 		2774DC031CC6A08D00E4AA86 /* UIImage+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MJ.m"; sourceTree = "<group>"; };
+		278C89E61CC9429900919F21 /* LSHFilmDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSHFilmDetailVC.h; sourceTree = "<group>"; };
+		278C89E71CC9429900919F21 /* LSHFilmDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSHFilmDetailVC.m; sourceTree = "<group>"; };
+		278C89E91CC9628B00919F21 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxHeaderView.h; sourceTree = "<group>"; };
+		278C89EA1CC9628B00919F21 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
+		278C89EF1CC9635500919F21 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		278C89F01CC9635500919F21 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		27AF2FF61CC56DFB0027E530 /* MovieListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieListTableViewCell.xib; sourceTree = "<group>"; };
 		27AF2FF81CC5758D0027E530 /* ListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionViewCell.h; sourceTree = "<group>"; };
 		27AF2FF91CC5758D0027E530 /* ListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionViewCell.m; sourceTree = "<group>"; };
@@ -3753,10 +3759,10 @@
 		2720BF4E1CBC0D19004C635D /* Contrller */ = {
 			isa = PBXGroup;
 			children = (
-				2720BF511CBC0D19004C635D /* hotMovieDetailViewController.h */,
-				2720BF521CBC0D19004C635D /* hotMovieDetailViewController.m */,
 				2717F35F1CBEC08A00686169 /* LSHHotMovieViewController.h */,
 				2717F3601CBEC08A00686169 /* LSHHotMovieViewController.m */,
+				278C89E61CC9429900919F21 /* LSHFilmDetailVC.h */,
+				278C89E71CC9429900919F21 /* LSHFilmDetailVC.m */,
 			);
 			path = Contrller;
 			sourceTree = "<group>";
@@ -4102,6 +4108,10 @@
 		4ED2B5F11C253DFA00403E7C /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				278C89EF1CC9635500919F21 /* UIImage+ImageEffects.h */,
+				278C89F01CC9635500919F21 /* UIImage+ImageEffects.m */,
+				278C89E91CC9628B00919F21 /* ParallaxHeaderView.h */,
+				278C89EA1CC9628B00919F21 /* ParallaxHeaderView.m */,
 				276EAEC31CC7FE1600DAE82A /* JSONModel */,
 				2774DC011CC6A08D00E4AA86 /* category */,
 				27AF2FFD1CC57F110027E530 /* SDWebImage */,
@@ -5325,6 +5335,7 @@
 				27AF30241CC57F110027E530 /* SDWebImageDownloader.m in Sources */,
 				4ED2B6371C253DFA00403E7C /* DJRefresh.m in Sources */,
 				2720BF7C1CBC0E80004C635D /* LSHTabBarViewController.m in Sources */,
+				278C89F11CC9635500919F21 /* UIImage+ImageEffects.m in Sources */,
 				2717F3241CBEB9BF00686169 /* MBProgressHUD.m in Sources */,
 				4E7ECC291C298A0E0009523D /* FMResultSet.m in Sources */,
 				27AF2FFB1CC5758D0027E530 /* ListCollectionViewCell.m in Sources */,
@@ -5345,6 +5356,7 @@
 				2720BF761CBC0DE8004C635D /* LSHTabBar.m in Sources */,
 				2717F3611CBEC08A00686169 /* LSHHotMovieViewController.m in Sources */,
 				276EAEBF1CC7FC0600DAE82A /* UserModel.m in Sources */,
+				278C89EB1CC9628B00919F21 /* ParallaxHeaderView.m in Sources */,
 				272590021C26481D0029A64E /* AFHTTPSessionManager.m in Sources */,
 				27AF301F1CC57F110027E530 /* MKAnnotationView+WebCache.m in Sources */,
 				272590001C26481D0029A64E /* AFHTTPRequestOperation.m in Sources */,
@@ -5383,7 +5395,7 @@
 				2720BF651CBC0D19004C635D /* AddViewController.m in Sources */,
 				2717F31B1CBEB92100686169 /* LSHHTTPTool.m in Sources */,
 				4ED2B5261C24F50A00403E7C /* main.m in Sources */,
-				2720BF691CBC0D19004C635D /* hotMovieDetailViewController.m in Sources */,
+				278C89E81CC9429900919F21 /* LSHFilmDetailVC.m in Sources */,
 				27AF30221CC57F110027E530 /* SDWebImageCompat.m in Sources */,
 				272590071C26481D0029A64E /* AFURLResponseSerialization.m in Sources */,
 				27AF30211CC57F110027E530 /* SDImageCache.m in Sources */,

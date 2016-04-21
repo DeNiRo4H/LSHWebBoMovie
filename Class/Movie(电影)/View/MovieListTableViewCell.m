@@ -23,25 +23,15 @@ static NSString *cellID = @"cellID";
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
     static NSString *ID = @"cellID";
-    
-  [tableView registerNib:[UINib nibWithNibName:@"MovieListTableViewCell"  bundle:nil] forCellReuseIdentifier:ID];
-    
+ 
     MovieListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
 
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
-        cell = [[MovieListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+        cell = (MovieListTableViewCell *)[[[NSBundle mainBundle]loadNibNamed:@"MovieListTableViewCell" owner:self options:nil] lastObject];
     }
     return cell;
 }
 
-//- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//    if (self) {
-//    
-//    }
-//    return self;
-//}
 
 - (void)setModel:(FilmListModel *)model{
     
@@ -52,7 +42,7 @@ static NSString *cellID = @"cellID";
     self.nameAndPerson.text = [NSString stringWithFormat:@"%@创建/%@人关注影单",model.user.name,[model.follow_count stringValue]] ;
     
     //self.delegate 表示cell的代理就是控制器
-    self.collectionView.delegate = self.delegate;
+//    self.collectionView.delegate = self.delegate;
     
 //    [self.collectionView reloadData];
 
