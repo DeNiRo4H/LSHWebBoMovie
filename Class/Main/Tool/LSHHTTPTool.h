@@ -10,6 +10,10 @@
 
 @interface LSHHTTPTool : NSObject
 
+//同一名称成类方法
++(instancetype)sharedAFN;
+
+
 /**
  *  发送一个POST请求
  *
@@ -18,7 +22,7 @@
  *  @param success 请求成功后的回调
  *  @param failure 请求失败后的回调
  */
-+ (void)postWithURL:(NSString *)url params:(NSDictionary *)params success:(void (^)(id json))success failure:(void (^)(NSError *error))failure;
+- (void)postWithURL:(NSString *)url params:(NSDictionary *)params success:(void (^)(id json))success failure:(void (^)(NSError *error))failure;
 
 /**
  *  发送一个POST请求(上传文件数据)
@@ -29,7 +33,7 @@
  *  @param success 请求成功后的回调
  *  @param failure 请求失败后的回调
  */
-+ (void)postWithURL:(NSString *)url params:(NSDictionary *)params formDataArray:(NSArray *)formDataArray success:(void (^)(id json))success failure:(void (^)(NSError *error))failure;
+- (void)postWithURL:(NSString *)url params:(NSDictionary *)params formDataArray:(NSArray *)formDataArray success:(void (^)(id json))success failure:(void (^)(NSError *error))failure;
 
 /**
  *  发送一个GET请求
@@ -39,7 +43,7 @@
  *  @param success 请求成功后的回调
  *  @param failure 请求失败后的回调
  */
-+ (void)getWithURL:(NSString *)url params:(NSDictionary *)params success:(void (^)(id json))success failure:(void (^)(NSError *error))failure;
+- (void)getWithURL:(NSString *)url params:(NSDictionary *)params success:(void (^)(id json))success failure:(void (^)(NSError *error))failure;
 
 @end
 

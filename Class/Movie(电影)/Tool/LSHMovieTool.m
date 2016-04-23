@@ -56,8 +56,8 @@
         _page[type] = 1;
     }
     NSDictionary *dic = @{@"page":@(_page[type])};
-    
-    [LSHHTTPTool postWithURL:urlStr params:dic success:^(id json) {
+
+    [[LSHHTTPTool sharedAFN ]  postWithURL:urlStr params:dic success:^(id json) {
     //解析
     switch (type) {
         case HotMovie:
@@ -106,7 +106,8 @@
 - (void)loadFilmListWithId:(NSString *)listID complicate:(Complicate)complicate{
     
     NSDictionary *dic = @{@"id":listID};
-    [LSHHTTPTool postWithURL:FILMLIST params:dic success:^(id json) {
+    
+    [[LSHHTTPTool sharedAFN ]  postWithURL:FILMLIST params:dic success:^(id json) {
      
             NSArray * array = json[@"data"][@"list"];
             NSMutableArray * filmModels = [NSMutableArray arrayWithCapacity:array.count];

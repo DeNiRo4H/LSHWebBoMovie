@@ -155,7 +155,7 @@ static const int tableViewTag = 90;
   
     void (^isFinishRefresh)();
     isFinishRefresh = ^{
-        [refresh finishRefreshing];
+        [refresh finishRefreshingDirection:direction animation:YES];
     };
     
     if (direction == DJRefreshDirectionTop) {

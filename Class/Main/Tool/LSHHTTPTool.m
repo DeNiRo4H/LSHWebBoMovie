@@ -8,65 +8,114 @@
 
 #import "LSHHTTPTool.h"
 #import "AFNetworking.h"
-#import "MBProgressHUD+Add.h"
+#import "MBProgressHUD.h"
 
+@interface LSHHTTPTool()
+@property(nonatomic, strong)AFHTTPSessionManager *manager;
 
+@end
 @implementation LSHHTTPTool
 
-
-+ (void)postWithURL:(NSString *)url params:(NSDictionary *)params success:(void (^)(id))success failure:(void (^)(NSError *))failure
-{
-    // 1.创建请求管理对象
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-     mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
-    // 2.发送请求
-    [mgr POST:url parameters:params
-      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          if (success) {
-              success(responseObject);
-          }
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          LSHLog(@"%@",error);
-      }];
+-(AFHTTPSessionManager *)manager{
+    if (_manager == nil) {
+        _manager = [AFHTTPSessionManager manager];
+        
+        _manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json", nil];
+    }
+    return _manager;
+    
 }
 
-+ (void)postWithURL:(NSString *)url params:(NSDictionary *)params formDataArray:(NSArray *)formDataArray success:(void (^)(id))success failure:(void (^)(NSError *))failure
+// 单例
++ (id)allocWithZone:(struct _NSZone *)zone{
+
+    static LSHHTTPTool *instance;
+    if(!instance){
+        instance = [super allocWithZone:zone];
+    }
+    return instance;
+}
+
+//同一名称成类方法
++(instancetype)sharedAFN{
+    return [[self alloc]init];
+}
+
+- (void)postWithURL:(NSString *)url params:(NSDictionary *)params success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     // 1.创建请求管理对象
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-      mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
-    // 2.发送请求
-    [mgr POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> totalFormData) {
-        for (LSHFormData *formData in formDataArray) {
-            [totalFormData appendPartWithFileData:formData.data name:formData.name fileName:formData.filename mimeType:formData.mimeType];
-        }
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+//     mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
+//    // 2.发送请求
+//    [mgr POST:url parameters:params
+//      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//          if (success) {
+//              success(responseObject);
+//          }
+//      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//          LSHLog(@"%@",error);
+//      }];
+    
+    [self.manager  POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         if (success) {
             success(responseObject);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        LSHLog(@"%@",error);
+    }];
+    
+}
+
+// 暂时用不上
+- (void)postWithURL:(NSString *)url params:(NSDictionary *)params formDataArray:(NSArray *)formDataArray success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+
+    // 1.创建请求管理对象
+//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+//      mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
+//    // 2.发送请求
+//    [mgr POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> totalFormData) {
+//        for (LSHFormData *formData in formDataArray) {
+//            [totalFormData appendPartWithFileData:formData.data name:formData.name fileName:formData.filename mimeType:formData.mimeType];
+//        }
+//    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        if (success) {
+//            success(responseObject);
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        if (failure) {
+//            failure(error);
+//        }
+//    }];
+}
+
+- (void)getWithURL:(NSString *)url params:(NSDictionary *)params success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+    
+    [self.manager GET:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failure) {
             failure(error);
         }
     }];
-}
-
-+ (void)getWithURL:(NSString *)url params:(NSDictionary *)params success:(void (^)(id))success failure:(void (^)(NSError *))failure
-{
-    // 1.创建请求管理对象
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    // 2.发送请求
-    [mgr GET:url parameters:params
-     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-         if (success) {
-             success(responseObject);
-         }
-     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         if (failure) {
-             failure(error);
-         }
-     }];
+//    // 1.创建请求管理对象
+//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+//    
+//    // 2.发送请求
+//    [mgr GET:url parameters:params
+//     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//         if (success) {
+//             success(responseObject);
+//         }
+//     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//         if (failure) {
+//             failure(error);
+//         }
+//     }];
 }
 
 
